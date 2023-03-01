@@ -8,7 +8,7 @@
     "shortener"
   ],
   "website": "https://github.com/Neutron-Bots",
-  "repository": "https://github.com/kevinnadar22/URL-Shortener-V2",
+  "repository": "https://github.com/pawanjaatpk/URL-Shortener-V2",
   "env": {
     "BOT_TOKEN": {
       "description": "Your bot token from @botfather",
@@ -78,7 +78,7 @@
   "formation": {
     "worker": {
       "quantity": 1,
-      "size": "free"
+      "size": "eco"
     }
   }
 }
