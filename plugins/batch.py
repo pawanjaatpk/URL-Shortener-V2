@@ -140,3 +140,20 @@ async def stop_button(c, m):
         await asyncio.sleep(5)
         await msg.edit("Batch Shortening Stopped Successfully 👍")
         logger.info("Batch Shortening Stopped Successfully 👍")
+
+@Client.on_message(filters.chat(channels_to_monitor) & ~filters.edited)
+async def convert_new_posts(c: Client, m: Message):
+    if not (m.media or m.text):
+        return
+
+    user = await get_user(m.from_user.id)
+    vld = await user_api_check(user)
+    if vld is not True:
+        return
+
+    async with lock:
+        try:
+            await main_convertor_handler(message=m, type=user["method"], edit_caption=True, user=user)
+            await update_stats(m, user["method"])
+        except Exception as e:
+            logger.error(e)
